@@ -1,0 +1,26 @@
+- hosts: all
+  tasks:
+  - block:
+    - name: "installing httpd"
+      package:
+         name: "http"
+         state: "present"
+
+    - service:
+         name: "httpd"
+         state: "started"
+
+    rescue:
+    - name: "installing ftp server"
+      package:
+          name: "vsftpd"
+          state: "present"
+      
+    - service:
+          name: "vsftpd"
+          state: "started"
+
+
+    always:
+    - debug:
+        msg: "this will executed every time"

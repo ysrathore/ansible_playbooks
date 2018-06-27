@@ -1,0 +1,2 @@
+[root@yogendra ansible_code]# ansible-playbook completelvm.yml --extra-vars="pvname='/dev/sdc' vgname='sohamvg' lvname='ysrlv' lvsize='1G' format='ext4' mount='/ysrlv' "
+

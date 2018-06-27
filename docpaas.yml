@@ -1,0 +1,3 @@
+- hosts: ani
+  tasks:
+  - command: "docker run -it --name yogi -v /usr/bin/:/usr/bin -v /usr/localbin:/usr/localbin -v /usr/lib64/:/usr/lib64 -v /tmp/.X11-unix:/tmp/.X11-unix -v /usr/local/lib64/python3.6/site-packages:/usr/local/lib64/python3.6/site-packages -e DISPLAY=$DISPLAY centos:latest"

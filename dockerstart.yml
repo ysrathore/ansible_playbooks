@@ -1,0 +1,13 @@
+- hosts: all
+  tasks:
+  - name: " container is launching"
+    docker_container:
+      name: "team"
+      image: "centos:latest"
+      interactive: true
+      tty: true
+      command: "/bin/bash"
+      state: "present"
+
+  - command: ""
+     

@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: "installin module"  
+    package: "name=httpd state=installed"
+  - name: "copying file"
+    copy: "src=index.html dest=/var/www/html"
+  - name: "starting service"
+    service: "name=httpd state=started"
+                

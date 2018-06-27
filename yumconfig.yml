@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: configuration yum repository
+    yum_repository:
+      name: yum repo
+      description:  YUM repo
+      file: ansible_yum
+      baseurl: ftp://192.168.43.217/pub/pakages/
+      gpgcheck: no

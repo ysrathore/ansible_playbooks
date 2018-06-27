@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+    - name: "creating vg"
+      lvg:
+        vg: "ansiblevg"
+        pvs: "/dev/sdc1"
+        pesize: 16

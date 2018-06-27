@@ -1,0 +1,29 @@
+- hosts: all
+  tasks:
+
+  - name: "installing web server software"
+    package:
+      name: "httpd"
+      state: "installed"
+
+  - name: "deploying index pages"
+    copy: 
+      content: "welcome to our web server {{ ansible_fqdn  }}"
+      dest: "/var/www/html/index.html"
+
+  - name: "deploying own web pages"
+    template:
+      src: "/code/ansible_code/web2.html.j2"
+      dest: "/var/www/html/web2.html"
+
+  - name: "starting services"
+    service: 
+      name: "httpd"
+      state: "started"
+
+  - name: "deactivating firewall services"
+    firewalld:
+      port: "80/tcp"
+      immediate: true
+      permanent: true
+      state: "enabled" 

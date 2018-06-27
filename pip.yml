@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: "install certain python modules for docker"
+    pip:
+      name: "{{ item.name }}"
+      version: "{{ item.version }}"
+      state: "present"
+    with_items:
+       - { name: docker-py, version: 1.10.6 }

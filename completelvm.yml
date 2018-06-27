@@ -1,0 +1,56 @@
+- hosts: all
+  vars_prompt:
+   # - name: pvsize
+   #   prompt: "enter the size of pv"
+   #   private: false
+    - name: pvname
+      prompt: "enter the name of device"
+      private: false
+    - name: vgname
+      prompt: "enter the name of vg"
+      private: false
+    - name: lvname
+      prompt: "enter the name of lv"
+      private: false
+    - name: lvsize
+      prompt: "enter the size of lv"
+      private: false
+    - name: format
+      prompt: "enter the type of format "
+      private: false
+    - name: mount 
+      prompt: "enter the mount point"
+      private: false
+  tasks:
+    - name: "creating pv"
+      parted:
+        device: "{{ pvname }}"
+        number: 1
+        state: "present"
+       # part_end: "{{ pvsize }}"
+        
+        
+    - name: "creating vg"
+      lvg:
+        vg: "{{ vgname }}"
+        pvs: "{{ pvname }}1"
+        pesize: 4
+
+    - name: "creating lvm"
+      lvol:
+         vg: "{{ vgname }}"
+         lv: "{{ lvname}}"
+         size: "{{ lvsize }}"
+  
+    - name: "creating file system"
+      filesystem:
+          fstype: "{{ format }}"
+          dev: "/dev/{{ vgname }}/{{ lvname }}"
+
+
+    - name: "enter the mounting folder"
+      mount:
+        name: "{{ mount }}"
+        src: "/dev/{{ vgname }}/{{ lvname }}"
+        fstype: "{{ format }}"
+        state: "mounted"
